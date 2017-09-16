@@ -147,7 +147,7 @@ public class OrderModel {
         findIngredients();
 
 
-        //things cna now be called...
+        //things can now be called...
 
     }
 
