@@ -95,6 +95,9 @@ public class OrderModel {
         return order;
     }
 
+    public int getPoints() {
+        return points;
+    }
     /**
      * Shuffles the ArrayLists.
      * @param list The set of lists to shuffle.

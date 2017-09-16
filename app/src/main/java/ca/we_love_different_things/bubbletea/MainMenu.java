@@ -18,6 +18,7 @@ public class MainMenu extends AppCompatActivity {
 
         Intent myIntent = new Intent(this, Controller.class);
         startActivity(myIntent);
+
     }
 
 
