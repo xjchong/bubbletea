@@ -1,5 +1,6 @@
 package ca.we_love_different_things.bubbletea;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 
 import java.util.ArrayList;
@@ -16,6 +17,11 @@ public class Controller implements Runnable{
     private int numOrders;
     private final int maxOrders = 10;
     private boolean running = true;
+    private GameActivity gameView;
+
+    public Controller(GameActivity view){
+        gameView = view;
+    }
 
     /**
      * Updates the model and get's the new order and set.
@@ -24,10 +30,9 @@ public class Controller implements Runnable{
 
         model.update();
         order = model.getOrder();
-        //gameView.setButtons(model.getButtons());
+       // gameView.setButtons(model.getButtons());
 
     }
-
 
     /**
      * Gives the View the required display and return settings for the button.
@@ -51,6 +56,7 @@ public class Controller implements Runnable{
 
             @Override
             public void onFinish() {
+                running = false;
                 numOrders++;
                 if(numOrders <= maxOrders)
                     new Timer(5000,1000);
@@ -64,7 +70,7 @@ public class Controller implements Runnable{
         }
 
         while(running){
-            Timer timer = new Timer(5000,1000);
+            Timer timer = new Timer(6000,1000);
 
 
         }
@@ -79,7 +85,7 @@ public class Controller implements Runnable{
     */
     /*GAME LOOP
 
-    if(!match){
+    if(match){
     game over!
 
     */

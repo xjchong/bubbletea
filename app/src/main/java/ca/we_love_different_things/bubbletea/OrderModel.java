@@ -56,6 +56,8 @@ public class OrderModel {
         listPearls.add(new Pair("Jelly", BLUE));
         listPearls.add(new Pair("Exploding", RED));
         listPearls.add(new Pair("None", WHITE));
+        listPearls.add(new Pair("Aloe Vera", GREEN));
+        listPearls.add(new Pair("Grass Jelly", CYAN));
 
         //listSugar[0] = new Pair("0%", "White")));
         listSugar.add(new Pair("25%", YELLOW));
