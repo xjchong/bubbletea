@@ -24,7 +24,7 @@ public class Controller implements Runnable{
 
         model.update();
         order = model.getOrder();
-        gameView.setButtons(model.getButtons());
+        //gameView.setButtons(model.getButtons());
 
     }
 
@@ -46,7 +46,7 @@ public class Controller implements Runnable{
                 super(millisInFuture, countDownInterval);
 
                 //create an icon in view
-                gameView.createTimer();
+                //gameView.createTimer();
             }
 
             @Override
