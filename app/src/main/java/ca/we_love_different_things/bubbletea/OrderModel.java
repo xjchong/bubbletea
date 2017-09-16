@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import static android.R.attr.max;
 
@@ -190,5 +191,63 @@ public class OrderModel {
 
     public boolean orderMatchesCreation(){
         return match;
+    }
+
+    public String displayMessage() {
+        // Sentence components
+        String greeting[] = new String[4];
+        String first[] = new String[5];
+        String second[] = new String[2];
+        String third[] = new String[3];
+        String fourth[] = new String[3];
+        String fifth[] = new String[2];
+
+        greeting[0] = "Hi, ";
+        greeting[1] = "Hello, ";
+        greeting[2] = "";
+        greeting[3] = "Yo, ";
+        int greetingVal = r(4);
+
+        first[0] = "I would like to order a";
+        if (greetingVal == 2) {
+            first[1] = "Can I get a";
+        } else {
+            first[1] = "can I get a";
+        }
+        first[2] = "I'll have the";
+        if (greetingVal == 2) {
+            first[3] = "Could I get a";
+        } else {
+            first[3] = "could I get a";
+        }
+        if (greetingVal == 2) {
+            first[4] = "Get me the";
+        } else {
+            first[4] = "get me the";
+        }
+
+        second[0] = "bubble tea with";
+        second[1] = "tea with";
+
+        third[0] = "pearls,";
+        third[1] = "pearls, topped with";
+        third[2] = "pearls, and";
+
+        fourth[0] = "milk, and";
+        fourth[1] = "milk, along with";
+        fourth[2] = "milk, plus";
+
+        fifth[0] = "sugar.";
+        fifth[1] = "sugar please.";
+
+        String message = String.format("%s%s %s %s %s %s %s %s %s %s",
+                greeting[greetingVal], first[r(5)], order.get(FLAVOR), second[r(2)], order.get(PEARL),
+                third[r(3)], order.get(MILK), fourth[r(3)], order.get(SUGAR), fifth[r(2)]);
+
+        return message;
+    }
+
+    public static int r(int n){
+        Random rand = new Random(); return rand.nextInt(n);
     }
 }

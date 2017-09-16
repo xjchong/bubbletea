@@ -14,6 +14,11 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
+    }
+
     public void button(View view){
 
         Intent myIntent = new Intent(this, Controller.class);

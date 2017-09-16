@@ -37,4 +37,9 @@ public class Pair {
         Log.d("onclick", "in isMatch");
         return name.equals(ingredient);
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

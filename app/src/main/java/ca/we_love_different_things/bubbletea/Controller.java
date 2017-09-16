@@ -26,10 +26,7 @@ public class Controller extends AppCompatActivity {
     public final static String EXTRA_SCORE = "ca.we_love_different_things.bubbletea.SCORE";
 
     private OrderModel model = new OrderModel();
-    private ArrayList<Pair> order;
-    private ArrayList<Pair> buttons;
-    private int numOrders;
-    private final int maxOrders = 10;
+
     private Button mIngredientButton0;
     private Button mIngredientButton1;
     private Button mIngredientButton2;
@@ -49,10 +46,18 @@ public class Controller extends AppCompatActivity {
         setNewOrder();
         setButtons(model.getButtons());
 
-        timer();
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress);
+        progressBar.setProgress(0);
+
+        progressBarTimer();
     }
 
-    public void timer(){
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
+    }
+
+    public void progressBarTimer() {
         timer = new Timer();
 
         TimerTask task = new TimerTask() {
@@ -61,7 +66,7 @@ public class Controller extends AppCompatActivity {
                 ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress);
                 progressBar.incrementProgressBy(1);
 
-                if(progressBar.getProgress() >= 100){
+                if (progressBar.getProgress() >= 100) {
                     gameOver();
                 }
             }
@@ -70,25 +75,19 @@ public class Controller extends AppCompatActivity {
         timer.schedule(task, 10, 1000);
     }
 
-    /**
-     * Gives the View the required display and return settings for the button.
-     * @return the set of buttons.
-     */
-    public ArrayList<Pair> getButtons(){
-        return buttons;
-    }
-
     public void setNewOrder(){
-        order = model.getOrder();
+
+        /*
+        ArrayList<Pair> order = model.getOrder();
 
         String string = "";
         for (Pair pair : order) string += pair.getName() + " ";
-
+*/
+        String string = model.displayMessage();
         TextView textView = (TextView) findViewById(R.id.order);
         textView.setText(string);
 
         TextView score = (TextView) findViewById(R.id.score);
-
         score.setText("" + model.getPoints());
 
         //maybe add an empty cup
@@ -117,6 +116,15 @@ public class Controller extends AppCompatActivity {
         //add image
         model.update(b.getText().toString());
         if (model.getStage() == 0) {
+            TimerTask pauseTask = new TimerTask() {
+                @Override
+                public void run() {
+                    //redraw
+                    //celebrate or somethign....
+                }
+            };
+            timer.schedule(pauseTask, 500);
+
             setNewOrder();
             //create an empty cup.
         }
