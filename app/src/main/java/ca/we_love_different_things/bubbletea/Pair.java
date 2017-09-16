@@ -1,5 +1,7 @@
 package ca.we_love_different_things.bubbletea;
 
+import android.util.Log;
+
 /**
  * Created by Jiashu on 2017-09-16.
  */
@@ -23,11 +25,16 @@ public class Pair {
         return color;
     }
 
-    public void setName(String n){
-        this.name = n;
+    public void setName(String name){
+        this.name = name;
     }
 
-    public void setColor(String c) {
-        this.color = c;
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public boolean isMatch(String ingredient){
+        Log.d("onclick", "in isMatch");
+        return name.equals(ingredient);
     }
 }

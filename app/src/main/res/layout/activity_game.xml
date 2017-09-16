@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context="ca.we_love_different_things.bubbletea.GameActivity">
+    tools:context="ca.we_love_different_things.bubbletea.Controller">
 
     <LinearLayout android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"

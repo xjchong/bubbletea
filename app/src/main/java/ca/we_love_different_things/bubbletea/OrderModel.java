@@ -1,9 +1,12 @@
 package ca.we_love_different_things.bubbletea;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static android.R.attr.max;
 
 /**
  * Created by Jiashu on 2017-09-16.
@@ -120,10 +123,10 @@ public class OrderModel {
 
         shuffle(LIST);
 
-        buttonPearls = (ArrayList) listPearls.subList(0,4);
-        buttonSugar  = (ArrayList) listSugar.subList(0,4);
-        buttonFlavor = (ArrayList) listFlavor.subList(0,4);
-        buttonMilk   = (ArrayList) listMilk.subList(0,4);
+        buttonPearls = new ArrayList<Pair>(listPearls.subList(0,4));
+        buttonSugar  = new ArrayList<Pair>(listSugar.subList(0,4));
+        buttonFlavor = new ArrayList<Pair>(listFlavor.subList(0,4));
+        buttonMilk   = new ArrayList<Pair>(listMilk.subList(0,4));
 
         randomize();
 
@@ -133,7 +136,7 @@ public class OrderModel {
 
 
     private void startOrder(){
-        stage = -1;
+        stage = 0;
 
         //Creates sets of four of the findIngredients and randomizes
         findIngredients();
@@ -157,9 +160,19 @@ public class OrderModel {
         }
     }
 
-    public void update(){
-        stage++;
+    public void update(String ingredient){
+        if (!order.get(stage++).isMatch(ingredient)) match = false;
+        /*
+        if (!order.get(stage++).isMatch(ingredient)){
+            dock them user some points
+            reset the stage to zero
+            clear the ingredients on the screen
+            reset an order
 
+            OR
+            startOrder
+        }
+         */
     }
 
     public boolean orderMatchesCreation(){

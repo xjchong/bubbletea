@@ -1,7 +1,11 @@
 package ca.we_love_different_things.bubbletea;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -9,7 +13,7 @@ import java.util.ArrayList;
  * Created by Jiashu on 2017-09-16.
  */
 
-public class Controller implements Runnable{
+public class Controller extends AppCompatActivity implements Runnable {
 
     private OrderModel model = new OrderModel();
     private ArrayList<Pair> order;
@@ -17,22 +21,23 @@ public class Controller implements Runnable{
     private int numOrders;
     private final int maxOrders = 10;
     private boolean running = true;
-    private GameActivity gameView;
+    private Button mIngredientButton0;
+    private Button mIngredientButton1;
+    private Button mIngredientButton2;
+    private Button mIngredientButton3;
 
-    public Controller(GameActivity view){
-        gameView = view;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+
+        mIngredientButton0 = (Button) findViewById(R.id.button0);
+        mIngredientButton1 = (Button) findViewById(R.id.button1);
+        mIngredientButton2 = (Button) findViewById(R.id.button2);
+        mIngredientButton3 = (Button) findViewById(R.id.button3);
     }
 
-    /**
-     * Updates the model and get's the new order and set.
-     */
-    private void update(){
 
-        model.update();
-        order = model.getOrder();
-       // gameView.setButtons(model.getButtons());
-
-    }
 
     /**
      * Gives the View the required display and return settings for the button.
@@ -75,6 +80,23 @@ public class Controller implements Runnable{
 
         }
     }
+
+
+    public void setButtons(ArrayList<Pair> ingredients) {
+        mIngredientButton0.setText(ingredients.get(0).getName());
+        mIngredientButton1.setText(ingredients.get(1).getName());
+        mIngredientButton2.setText(ingredients.get(2).getName());
+        mIngredientButton3.setText(ingredients.get(3).getName());
+    }
+
+    public void onIngredientClick(View button) {
+        Button b = (Button) button;
+        model.update(b.getText().toString());
+        order = model.getOrder();
+        setButtons(model.getButtons());
+
+    }
+
 
     /*Game view...
     createTimer... the icons XD;

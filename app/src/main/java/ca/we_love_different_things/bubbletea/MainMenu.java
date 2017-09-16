@@ -16,7 +16,7 @@ public class MainMenu extends AppCompatActivity {
 
     public void button(View view){
 
-        Intent myIntent = new Intent(this, GameActivity.class);
+        Intent myIntent = new Intent(this, Controller.class);
         startActivity(myIntent);
     }
 
