@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -35,9 +38,10 @@ public class Controller extends AppCompatActivity implements Runnable {
         mIngredientButton1 = (Button) findViewById(R.id.button1);
         mIngredientButton2 = (Button) findViewById(R.id.button2);
         mIngredientButton3 = (Button) findViewById(R.id.button3);
+
+        setNewOrder();
+        setButtons(model.getButtons());
     }
-
-
 
     /**
      * Gives the View the required display and return settings for the button.
@@ -50,7 +54,7 @@ public class Controller extends AppCompatActivity implements Runnable {
     @Override
     public void run() {
 
-         class Timer extends CountDownTimer {
+        class Timer extends CountDownTimer {
 
             public Timer(long millisInFuture, long countDownInterval) {
                 super(millisInFuture, countDownInterval);
@@ -63,8 +67,8 @@ public class Controller extends AppCompatActivity implements Runnable {
             public void onFinish() {
                 running = false;
                 numOrders++;
-                if(numOrders <= maxOrders)
-                    new Timer(5000,1000);
+                if (numOrders <= maxOrders)
+                    new Timer(5000, 1000);
             }
 
             @Override
@@ -74,13 +78,26 @@ public class Controller extends AppCompatActivity implements Runnable {
             }
         }
 
-        while(running){
-            Timer timer = new Timer(6000,1000);
-
-
+        while (running) {
+            Timer timer = new Timer(6000, 1000);
         }
     }
 
+    public void setNewOrder(){
+        order = model.getOrder();
+
+        String string = "";
+        for (Pair pair : order) string += pair.getName() + "\n";
+
+        TextView textView = (TextView) findViewById(R.id.order);
+        textView.setText(string);
+
+        //maybe add an empty cup
+    }
+
+    public void addIngredient(){
+
+    }
 
     public void setButtons(ArrayList<Pair> ingredients) {
         mIngredientButton0.setText(ingredients.get(0).getName());
@@ -91,10 +108,13 @@ public class Controller extends AppCompatActivity implements Runnable {
 
     public void onIngredientClick(View button) {
         Button b = (Button) button;
+        //add image
         model.update(b.getText().toString());
-        order = model.getOrder();
+        if (model.getStage() == 0) {
+            setNewOrder();
+            //create an empty cup.
+        }
         setButtons(model.getButtons());
-
     }
 
 

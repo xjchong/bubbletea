@@ -51,6 +51,8 @@ public class OrderModel {
     //Whether it's a match or not
     private boolean match = true;
 
+    private int points = -1;
+
     /**
      * Matches an ingredient with a color.
      */
@@ -137,13 +139,16 @@ public class OrderModel {
 
     private void startOrder(){
         stage = 0;
-
+        if(match) points++; else points--;
+        match = true;
         //Creates sets of four of the findIngredients and randomizes
+
+        order.clear();
         findIngredients();
+
 
         //things cna now be called...
 
-        //new Timer(5000,1000);
     }
 
     /**
@@ -161,18 +166,23 @@ public class OrderModel {
     }
 
     public void update(String ingredient){
-        if (!order.get(stage++).isMatch(ingredient)) match = false;
-        /*
-        if (!order.get(stage++).isMatch(ingredient)){
-            dock them user some points
-            reset the stage to zero
-            clear the ingredients on the screen
-            reset an order
 
-            OR
-            startOrder
+
+        if (!order.get(stage++).isMatch(ingredient)){
+            match = false;
+            startOrder();
         }
-         */
+        else if(stage >= 4){
+            startOrder();
+        }
+        else{
+
+        }
+
+    }
+
+    public int getStage(){
+        return stage;
     }
 
     public boolean orderMatchesCreation(){
