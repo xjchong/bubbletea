@@ -19,8 +19,12 @@ public class GameOver extends AppCompatActivity {
         textView.setText("Game over!\nYou scored:\n" + score);
     }
 
+    public void onBackPressed(){
+        moveTaskToBack(false);
+    }
+
     public void button(View view){
-        Intent intent = new Intent(this, MainMenu.class);
+        Intent intent = new Intent(this, Controller.class);
         startActivity(intent);
     }
 }
