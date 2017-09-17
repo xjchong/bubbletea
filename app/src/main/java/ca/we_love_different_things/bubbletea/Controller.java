@@ -1,6 +1,7 @@
 package ca.we_love_different_things.bubbletea;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -63,6 +64,11 @@ public class Controller extends AppCompatActivity {
         score = (TextView) findViewById(R.id.score);
         timer = new Timer();
 
+       // MediaPlayer mediaPlayer = MediaPlayer.create("Button", R.raw.button);
+        //mediaPlayer.start();
+
+        //mediaPlayer.
+
         setNewOrder();
         setButtons(model.getButtons());
 
@@ -118,8 +124,6 @@ public class Controller extends AppCompatActivity {
                 setImages();
             }
         });
-
-        //maybe add an empty cup
     }
 
     public void setImages(){
@@ -132,7 +136,11 @@ public class Controller extends AppCompatActivity {
             case "coconut": images[FLAVOR].setImageResource(R.drawable.flavour_coconut); break;
             case "strawberry": images[FLAVOR].setImageResource(R.drawable.flavour_strawberry); break;
             case "taro": images[FLAVOR].setImageResource(R.drawable.flavour_taro); break;
-            case "original":images[FLAVOR].setImageResource(R.drawable.flavour_original); break;
+            case "original": images[FLAVOR].setImageResource(R.drawable.flavour_original); break;
+            case "chocolate": images[FLAVOR].setImageResource(R.drawable.flavour_chocolate); break;
+            case "apple": images[FLAVOR].setImageResource(R.drawable.flavour_apple); break;
+            case "matcha": images[FLAVOR].setImageResource(R.drawable.flavour_matcha); break;
+            case "mango": images[FLAVOR].setImageResource(R.drawable.flavour_mango); break;
         }
 
         String toppings = model.getOrder().get(TOPPING).toString();
