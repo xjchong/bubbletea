@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +33,12 @@ public class Controller extends AppCompatActivity {
     private TextView score;
     private Timer timer;
 
+    private final int TOPPING = 0;
+    private final int SUGAR = 1;
+    private final int FLAVOR = 2;
+    private final int MILK = 3;
+    private final int LID = 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +51,11 @@ public class Controller extends AppCompatActivity {
         mIngredientButton3 = (Button) findViewById(R.id.button3);
 
         //images[0] = (ImageView) findViewById(R.id.cup);
-        images[0] = (ImageView) findViewById(R.id.toppings);
-        images[1] = (ImageView) findViewById(R.id.sweetener);
-        images[2] = (ImageView) findViewById(R.id.tea_flavour);
-        images[3] = (ImageView) findViewById(R.id.milk);
-        images[4] = (ImageView) findViewById(R.id.lid_and_straw);
+        images[TOPPING] = (ImageView) findViewById(R.id.toppings);
+        images[SUGAR] = (ImageView) findViewById(R.id.sweetener);
+        images[FLAVOR] = (ImageView) findViewById(R.id.tea_flavour);
+        images[MILK] = (ImageView) findViewById(R.id.milk);
+        images[LID] = (ImageView) findViewById(R.id.lid_and_straw);
         progressBar = (ProgressBar) findViewById(R.id.progress);
         message = (TextView) findViewById(R.id.message);
         score = (TextView) findViewById(R.id.score);
@@ -103,17 +107,39 @@ public class Controller extends AppCompatActivity {
 
                 message.setText(model.orderMessage());
                 score.setText("" + model.getPoints());
-                for(ImageView image: images)    image.setVisibility(View.INVISIBLE);
+                setImages();
             }
         });
 
         //maybe add an empty cup
     }
 
-    public void addIngredient(){
-        ImageView image = images[0];
-        image.getVisibility();
+    public void setImages(){
+        for(ImageView image: images) {
+            image.setVisibility(View.INVISIBLE);
+        }
 
+        String flavors = model.getOrder().get(FLAVOR).toString();
+        switch(flavors) {
+            case "Coconut": images[FLAVOR].setImageResource(R.drawable.flavour_coconut); break;
+            case "Strawberry": images[FLAVOR].setImageResource(R.drawable.flavour_strawberry); break;
+            case "Taro": images[FLAVOR].setImageResource(R.drawable.flavour_taro); break;
+            case "Original":images[FLAVOR].setImageResource(R.drawable.flavour_original); break;
+        }
+
+        String toppings = model.getOrder().get(TOPPING).toString();
+        switch(toppings) {
+            case "Mini Pearls": images[TOPPING].setImageResource(R.drawable.toppings_mini_pearls); break;
+            case "Panda Pearls": images[TOPPING].setImageResource(R.drawable.toppings_panda_pearls); break;
+            case "Regular Pearls":images[TOPPING].setImageResource(R.drawable.toppings_regular_pearls); break;
+            case "Grass Jelly": images[TOPPING].setImageResource(R.drawable.toppings_grass_jelly); break;
+            case "Fruit Jelly": images[TOPPING].setImageResource(R.drawable.toppings_fruit_jelly); break;
+            case "Aloe Jelly": images[TOPPING].setImageResource(R.drawable.toppings_aloe_jelly); break;
+            case "No Pearls": images[TOPPING].setImageResource(R.drawable.toppings_no_pearls); break;
+        }
+
+        images[SUGAR].setImageResource(R.drawable.sugar_quarter);
+        images[MILK].setImageResource(R.drawable.milk);
     }
 
     public void setButtons(ArrayList<Pair> ingredients) {
@@ -135,8 +161,8 @@ public class Controller extends AppCompatActivity {
 
         //images
         images[model.getStage()].setVisibility(View.VISIBLE);
-        if (model.getStage() == 3){
-            images[4].setVisibility(View.VISIBLE);
+        if (model.getStage() == MILK){
+            images[LID].setVisibility(View.VISIBLE);
         }
 
         model.update(button.getText().toString());
