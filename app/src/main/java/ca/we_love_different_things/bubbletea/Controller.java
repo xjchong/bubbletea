@@ -45,6 +45,7 @@ public class Controller extends AppCompatActivity {
         mIngredientButton1 = (Button) findViewById(R.id.button1);
         mIngredientButton2 = (Button) findViewById(R.id.button2);
         mIngredientButton3 = (Button) findViewById(R.id.button3);
+
         //images[0] = (ImageView) findViewById(R.id.cup);
         images[0] = (ImageView) findViewById(R.id.toppings);
         images[1] = (ImageView) findViewById(R.id.sweetener);
@@ -106,7 +107,6 @@ public class Controller extends AppCompatActivity {
             }
         });
 
-
         //maybe add an empty cup
     }
 
@@ -140,6 +140,7 @@ public class Controller extends AppCompatActivity {
         }
 
         model.update(button.getText().toString());
+
         if (model.getStage() == 0) {
             if (model.getMatch()){
                 progressBar.incrementProgressBy(-5);
