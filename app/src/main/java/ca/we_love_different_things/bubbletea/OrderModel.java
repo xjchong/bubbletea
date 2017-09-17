@@ -23,20 +23,21 @@ public class OrderModel {
     //No magic numbers
     private final int TOPPING = 0;
     private final int SUGAR = 1;
-    private final int FLAVOR = 2;
-    private final int MILK = 3;
+    private final int MILK = 2;
+    private final int FLAVOR = 3;
+
 
     //To list of all types of findIngredients
     private ArrayList<Pair> listPearls = new ArrayList<>();
     private ArrayList<Pair> listSugar = new ArrayList<>();
-    private ArrayList<Pair> listFlavor = new ArrayList<>();
     private ArrayList<Pair> listMilk = new ArrayList<>();
+    private ArrayList<Pair> listFlavor = new ArrayList<>();
     
     //Arrays of 4 to be turned into buttons
     private ArrayList<Pair> buttonPearls;
     private ArrayList<Pair> buttonSugar;
-    private ArrayList<Pair> buttonFlavor;
     private ArrayList<Pair> buttonMilk;
+    private ArrayList<Pair> buttonFlavor;
 
     //How far along we are to completing the drink
     private static int stage;
@@ -67,15 +68,15 @@ public class OrderModel {
         listSugar.add(new Pair("3/4 Sweet", PINK));
         listSugar.add(new Pair("Regular Sweet", BLACK));
 
-        listFlavor.add(new Pair("Coconut", WHITE));
-        listFlavor.add(new Pair("Strawberry", RED));
-        listFlavor.add(new Pair("Taro", BLUE));
-        listFlavor.add(new Pair("Original", YELLOW));
-
         listMilk.add(new Pair("Skim Milk", WHITE));
         listMilk.add(new Pair("1% Milk", RED));
         listMilk.add(new Pair("2% Milk", BLUE));
         listMilk.add(new Pair("Soy Milk", YELLOW));
+
+        listFlavor.add(new Pair("Coconut", WHITE));
+        listFlavor.add(new Pair("Strawberry", RED));
+        listFlavor.add(new Pair("Taro", BLUE));
+        listFlavor.add(new Pair("Original", YELLOW));
 
         startOrder();
     }
@@ -84,8 +85,8 @@ public class OrderModel {
     public void randomize(){
         order.add(buttonPearls.get(0));
         order.add(buttonSugar.get(0));
-        order.add(buttonFlavor.get(0));
         order.add(buttonMilk.get(0));
+        order.add(buttonFlavor.get(0));
     }
 
     public ArrayList<Pair> getOrder() {
@@ -105,14 +106,14 @@ public class OrderModel {
         if(list) {
             Collections.shuffle(listPearls);
             Collections.shuffle(listSugar);
-            Collections.shuffle(listFlavor);
             Collections.shuffle(listMilk);
+            Collections.shuffle(listFlavor);
         }
         else{
             Collections.shuffle(buttonPearls);
             Collections.shuffle(buttonSugar);
-            Collections.shuffle(buttonFlavor);
             Collections.shuffle(buttonMilk);
+            Collections.shuffle(buttonFlavor);
         }
     }
 
@@ -128,8 +129,8 @@ public class OrderModel {
 
         buttonPearls = new ArrayList<Pair>(listPearls.subList(0,4));
         buttonSugar  = new ArrayList<Pair>(listSugar.subList(0,4));
-        buttonFlavor = new ArrayList<Pair>(listFlavor.subList(0,4));
         buttonMilk   = new ArrayList<Pair>(listMilk.subList(0,4));
+        buttonFlavor = new ArrayList<Pair>(listFlavor.subList(0,4));
 
         randomize();
 
@@ -157,10 +158,10 @@ public class OrderModel {
      */
     public ArrayList<Pair> getButtons(){
         switch(stage){
-            case TOPPING:    return buttonPearls;
+            case TOPPING:   return buttonPearls;
             case SUGAR :    return buttonSugar;
-            case FLAVOR:    return buttonFlavor;
             case MILK  :    return buttonMilk;
+            case FLAVOR:    return buttonFlavor;
             default    :    return null;
         }
     }

@@ -35,8 +35,8 @@ public class Controller extends AppCompatActivity {
 
     private final int TOPPING = 0;
     private final int SUGAR = 1;
-    private final int FLAVOR = 2;
-    private final int MILK = 3;
+    private final int FLAVOR = 3;
+    private final int MILK = 2;
     private final int LID = 4;
 
     @Override
@@ -138,8 +138,16 @@ public class Controller extends AppCompatActivity {
             case "No Pearls": images[TOPPING].setImageResource(R.drawable.toppings_no_pearls); break;
         }
 
-        images[SUGAR].setImageResource(R.drawable.sugar_quarter);
+        if(!model.getOrder().get(SUGAR).isMatch("No Sugar")){
+            images[SUGAR].setImageResource(R.drawable.sugar_quarter);
+        }
+        else{
+            images[SUGAR].setImageResource(R.drawable.toppings_no_pearls);
+        }
+
         images[MILK].setImageResource(R.drawable.milk);
+
+        images[LID].setImageResource(R.drawable.lid_and_straw);
     }
 
     public void setButtons(ArrayList<Pair> ingredients) {
@@ -161,7 +169,7 @@ public class Controller extends AppCompatActivity {
 
         //images
         images[model.getStage()].setVisibility(View.VISIBLE);
-        if (model.getStage() == MILK){
+        if (images[FLAVOR].getVisibility() == View.VISIBLE){
             images[LID].setVisibility(View.VISIBLE);
         }
 
