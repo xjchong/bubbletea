@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -55,6 +57,8 @@ public class Controller extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(false);
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
     }
 
     /**
@@ -84,8 +88,15 @@ public class Controller extends AppCompatActivity {
         model.setMatch(true);
 
         //Changes the TextViews
-        message.setText(model.orderMessage());
-        score.setText("" + model.getPoints());
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                message.setText(model.orderMessage());
+                score.setText("" + model.getPoints());
+            }
+        });
+
 
         //maybe add an empty cup
     }
@@ -120,6 +131,7 @@ public class Controller extends AppCompatActivity {
                 progressBar.incrementProgressBy(10);
             }
             message.setText(model.finishMessage());
+            canClick(false);
             TimerTask pauseTask = new TimerTask() {
                 @Override
                 public void run() {
@@ -127,11 +139,19 @@ public class Controller extends AppCompatActivity {
                     //celebrate or somethign....
 
                     setNewOrder();
+                    canClick(true);
 
                 }
             };
-            timer.schedule(pauseTask, 500);
+            timer.schedule(pauseTask, 1000);
         }
         setButtons(model.getButtons());
+    }
+
+    public void canClick(boolean bool){
+        mIngredientButton0.setClickable(bool);
+        mIngredientButton1.setClickable(bool);
+        mIngredientButton2.setClickable(bool);
+        mIngredientButton3.setClickable(bool);
     }
 }

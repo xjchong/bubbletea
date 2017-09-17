@@ -56,7 +56,7 @@ public class OrderModel {
         listPearls.add(new Pair("Tapioca", BLACK));
         listPearls.add(new Pair("Jelly", BLUE));
         listPearls.add(new Pair("Exploding", RED));
-        listPearls.add(new Pair("None", WHITE));
+        listPearls.add(new Pair("No", WHITE));
         listPearls.add(new Pair("Aloe Vera", GREEN));
         listPearls.add(new Pair("Grass Jelly", CYAN));
 
@@ -64,7 +64,7 @@ public class OrderModel {
         listSugar.add(new Pair("1/4", YELLOW));
         listSugar.add(new Pair("1/2", GREEN));
         listSugar.add(new Pair("3/4", PINK));
-        listSugar.add(new Pair("Regular%", BLACK));
+        listSugar.add(new Pair("Regular", BLACK));
 
         listFlavor.add(new Pair("Coconut", WHITE));
         listFlavor.add(new Pair("Strawberry", RED));
@@ -140,7 +140,6 @@ public class OrderModel {
     private void startOrder(){
         stage = 0;
         if(match) points++; else points--;
-        match = true;
         //Creates sets of four of the findIngredients and randomizes
 
         order.clear();
