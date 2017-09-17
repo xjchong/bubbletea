@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,8 +29,8 @@ public class Controller extends AppCompatActivity {
     private Button mIngredientButton3;
     private ProgressBar progressBar;
     private TextView message;
+    private TextView score;
     private Timer timer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,10 @@ public class Controller extends AppCompatActivity {
         mIngredientButton1 = (Button) findViewById(R.id.button1);
         mIngredientButton2 = (Button) findViewById(R.id.button2);
         mIngredientButton3 = (Button) findViewById(R.id.button3);
-        message = (TextView) findViewById(R.id.message);
-        timer = new Timer();
         progressBar = (ProgressBar) findViewById(R.id.progress);
+        message = (TextView) findViewById(R.id.message);
+        score = (TextView) findViewById(R.id.score);
+        timer = new Timer();
 
         setNewOrder();
         setButtons(model.getButtons());
@@ -74,15 +76,9 @@ public class Controller extends AppCompatActivity {
     public void setNewOrder(){
         // tell the model to set match == true
         model.setMatch(true);
-        /*
-        ArrayList<Pair> order = model.getOrder();
-
-        String string = "";
-        for (Pair pair : order) string += pair.getName() + " ";
-*/
         message.setText(model.orderMessage());
 
-        TextView score = (TextView) findViewById(R.id.score);
+
         score.setText("" + model.getPoints());
 
         //maybe add an empty cup
@@ -111,7 +107,12 @@ public class Controller extends AppCompatActivity {
         //add image
         model.update(b.getText().toString());
         if (model.getStage() == 0) {
-
+            if (model.getMatch()){
+                progressBar.incrementProgressBy(-5);
+            }
+            else {
+                progressBar.incrementProgressBy(10);
+            }
             message.setText(model.finishMessage());
             TimerTask pauseTask = new TimerTask() {
                 @Override

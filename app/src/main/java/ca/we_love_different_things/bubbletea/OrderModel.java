@@ -46,8 +46,7 @@ public class OrderModel {
 
     //Whether it's a match or not
     private boolean match = true;
-    private boolean prev;
-
+    
     private int points = -1;
 
     /**
@@ -170,11 +169,9 @@ public class OrderModel {
         if (!order.get(stage++).isMatch(ingredient)){
             match = false;
             startOrder();
-            prev = false;
         }
         else if(stage >= 4){
             startOrder();
-            prev = true;
         }
         else{
 
@@ -291,5 +288,9 @@ public class OrderModel {
 
     public void setMatch(boolean match) {
         this.match = match;
+    }
+
+    public boolean getMatch() {
+        return match;
     }
 }
