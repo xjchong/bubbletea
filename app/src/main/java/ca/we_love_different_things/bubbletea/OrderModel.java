@@ -46,7 +46,7 @@ public class OrderModel {
 
     //Whether it's a match or not
     private boolean match = true;
-    
+
     private int points = -1;
 
     /**
