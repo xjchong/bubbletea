@@ -77,6 +77,11 @@ public class OrderModel {
         listFlavor.add(new Pair("strawberry", RED));
         listFlavor.add(new Pair("taro", BLUE));
         listFlavor.add(new Pair("original", YELLOW));
+        listFlavor.add(new Pair("apple", BLACK));
+        listFlavor.add(new Pair("chocolate", CYAN));
+        listFlavor.add(new Pair("matcha", GREEN));
+        listFlavor.add(new Pair("mango", PINK));
+
 
         startOrder();
     }
