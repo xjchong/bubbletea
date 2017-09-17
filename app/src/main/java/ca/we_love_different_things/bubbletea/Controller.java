@@ -39,6 +39,8 @@ public class Controller extends AppCompatActivity {
     private final int MILK = 2;
     private final int LID = 4;
 
+    private boolean pause = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +72,14 @@ public class Controller extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(false);
+        pause = true;
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
+    }
+
+    public void onResume(){
+        super.onResume();
+        pause = false;
     }
 
     /**
@@ -82,7 +90,7 @@ public class Controller extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                progressBar.incrementProgressBy(1);
+                if(!pause) progressBar.incrementProgressBy(1);
 
                 //Game over
                 if (progressBar.getProgress() >= 100)   gameOver();
