@@ -1,13 +1,8 @@
 package ca.we_love_different_things.bubbletea;
 
-import android.os.CountDownTimer;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import static android.R.attr.max;
 
 /**
  * Created by Jiashu on 2017-09-16.
@@ -51,6 +46,7 @@ public class OrderModel {
 
     //Whether it's a match or not
     private boolean match = true;
+    private boolean prev;
 
     private int points = -1;
 
@@ -171,13 +167,14 @@ public class OrderModel {
 
     public void update(String ingredient){
 
-
         if (!order.get(stage++).isMatch(ingredient)){
             match = false;
             startOrder();
+            prev = false;
         }
         else if(stage >= 4){
             startOrder();
+            prev = true;
         }
         else{
 
@@ -193,7 +190,7 @@ public class OrderModel {
         return match;
     }
 
-    public String displayMessage() {
+    public String orderMessage() {
         // Sentence components
         String greeting[] = new String[4];
         String first[] = new String[5];
@@ -206,7 +203,7 @@ public class OrderModel {
         greeting[1] = "Hello, ";
         greeting[2] = "";
         greeting[3] = "Yo, ";
-        int greetingVal = r(4);
+        int greetingVal = rand(4);
 
         first[0] = "I would like to order a";
         if (greetingVal == 2) {
@@ -241,13 +238,58 @@ public class OrderModel {
         fifth[1] = "sugar please.";
 
         String message = String.format("%s%s %s %s %s %s %s %s %s %s",
-                greeting[greetingVal], first[r(5)], order.get(FLAVOR), second[r(2)], order.get(PEARL),
-                third[r(3)], order.get(MILK), fourth[r(3)], order.get(SUGAR), fifth[r(2)]);
+                greeting[greetingVal], first[rand(5)], order.get(FLAVOR), second[rand(2)], order.get(PEARL),
+                third[rand(3)], order.get(MILK), fourth[rand(3)], order.get(SUGAR), fifth[rand(2)]);
 
         return message;
     }
 
-    public static int r(int n){
+    public String finishMessage(){
+        
+        String message;
+        
+        if(match){
+            //success message
+            
+            switch(rand(10)){
+                case 0: message = "Thank you!"; break;
+                case 1: message = "Thanks..."; break;
+                case 2: message = "Yayyy!!!!"; break;
+                case 3: message = "Yum!"; break;
+                case 4: message = "Yummy!"; break;
+                case 5: message = "A solid 10!"; break;
+                case 6: message = "10 out of 10!"; break;
+                case 7: message = "Arigato gozaimasu~"; break;
+                case 8: message = "More please!"; break;
+                case 9: message = "Definitely worth the wait!"; break;
+                default: message = null;
+            }
+        }
+        else{
+
+            switch(rand(10)){
+                case 0: message = "......"; break;
+                case 1: message = "Well then..."; break;
+                case 2: message = "?!@#!$?#"; break;
+                case 3: message = "No! Just... No!"; break;
+                case 4: message = "You meanie!"; break;
+                case 5: message = "IT'S RAW!?!"; break;
+                case 6: message = "Not to worry, I won't EVER come back."; break;
+                case 7: message = "Seriously?"; break;
+                case 8: message = "What is this???"; break;
+                case 9: message = "Would rather die..."; break;
+                default: message = null;
+            }
+        }
+        
+        return message;
+    }
+    
+    public static int rand(int n){
         Random rand = new Random(); return rand.nextInt(n);
+    }
+
+    public void setMatch(boolean match) {
+        this.match = match;
     }
 }

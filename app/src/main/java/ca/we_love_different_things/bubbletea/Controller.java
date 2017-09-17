@@ -2,16 +2,11 @@ package ca.we_love_different_things.bubbletea;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -31,7 +26,10 @@ public class Controller extends AppCompatActivity {
     private Button mIngredientButton1;
     private Button mIngredientButton2;
     private Button mIngredientButton3;
-    Timer timer;
+    private ProgressBar progressBar;
+    private TextView message;
+    private Timer timer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +40,12 @@ public class Controller extends AppCompatActivity {
         mIngredientButton1 = (Button) findViewById(R.id.button1);
         mIngredientButton2 = (Button) findViewById(R.id.button2);
         mIngredientButton3 = (Button) findViewById(R.id.button3);
+        message = (TextView) findViewById(R.id.message);
+        timer = new Timer();
+        progressBar = (ProgressBar) findViewById(R.id.progress);
 
         setNewOrder();
         setButtons(model.getButtons());
-
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress);
-        progressBar.setProgress(0);
 
         progressBarTimer();
     }
@@ -58,12 +56,10 @@ public class Controller extends AppCompatActivity {
     }
 
     public void progressBarTimer() {
-        timer = new Timer();
-
+        progressBar.setProgress(0);
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress);
                 progressBar.incrementProgressBy(1);
 
                 if (progressBar.getProgress() >= 100) {
@@ -76,16 +72,15 @@ public class Controller extends AppCompatActivity {
     }
 
     public void setNewOrder(){
-
+        // tell the model to set match == true
+        model.setMatch(true);
         /*
         ArrayList<Pair> order = model.getOrder();
 
         String string = "";
         for (Pair pair : order) string += pair.getName() + " ";
 */
-        String string = model.displayMessage();
-        TextView textView = (TextView) findViewById(R.id.order);
-        textView.setText(string);
+        message.setText(model.orderMessage());
 
         TextView score = (TextView) findViewById(R.id.score);
         score.setText("" + model.getPoints());
@@ -116,17 +111,19 @@ public class Controller extends AppCompatActivity {
         //add image
         model.update(b.getText().toString());
         if (model.getStage() == 0) {
+
+            message.setText(model.finishMessage());
             TimerTask pauseTask = new TimerTask() {
                 @Override
                 public void run() {
                     //redraw
                     //celebrate or somethign....
+
+                    setNewOrder();
+
                 }
             };
             timer.schedule(pauseTask, 500);
-
-            setNewOrder();
-            //create an empty cup.
         }
         setButtons(model.getButtons());
     }
