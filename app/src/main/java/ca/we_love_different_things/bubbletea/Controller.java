@@ -29,6 +29,7 @@ public class Controller extends AppCompatActivity {
     private Button mIngredientButton1;
     private Button mIngredientButton2;
     private Button mIngredientButton3;
+    private ImageView[] images = new ImageView[5];
     private ProgressBar progressBar;
     private TextView message;
     private TextView score;
@@ -39,10 +40,17 @@ public class Controller extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //Find all of the views and get references
         mIngredientButton0 = (Button) findViewById(R.id.button0);
         mIngredientButton1 = (Button) findViewById(R.id.button1);
         mIngredientButton2 = (Button) findViewById(R.id.button2);
         mIngredientButton3 = (Button) findViewById(R.id.button3);
+        //images[0] = (ImageView) findViewById(R.id.cup);
+        images[0] = (ImageView) findViewById(R.id.toppings);
+        images[1] = (ImageView) findViewById(R.id.sweetener);
+        images[2] = (ImageView) findViewById(R.id.tea_flavour);
+        images[3] = (ImageView) findViewById(R.id.milk);
+        images[4] = (ImageView) findViewById(R.id.lid_and_straw);
         progressBar = (ProgressBar) findViewById(R.id.progress);
         message = (TextView) findViewById(R.id.message);
         score = (TextView) findViewById(R.id.score);
@@ -94,6 +102,7 @@ public class Controller extends AppCompatActivity {
 
                 message.setText(model.orderMessage());
                 score.setText("" + model.getPoints());
+                for(ImageView image: images)    image.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -102,6 +111,8 @@ public class Controller extends AppCompatActivity {
     }
 
     public void addIngredient(){
+        ImageView image = images[0];
+        image.getVisibility();
 
     }
 
@@ -121,7 +132,13 @@ public class Controller extends AppCompatActivity {
 
     public void onIngredientClick(View view) {
         Button button = (Button) view;
-        //add image
+
+        //images
+        images[model.getStage()].setVisibility(View.VISIBLE);
+        if (model.getStage() == 3){
+            images[4].setVisibility(View.VISIBLE);
+        }
+
         model.update(button.getText().toString());
         if (model.getStage() == 0) {
             if (model.getMatch()){
@@ -140,7 +157,6 @@ public class Controller extends AppCompatActivity {
 
                     setNewOrder();
                     canClick(true);
-
                 }
             };
             timer.schedule(pauseTask, 1000);
