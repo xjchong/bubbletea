@@ -4,4 +4,10 @@
     <string name="meter">METER</string>
     <string name="orders">ORDERS</string>
     <string name="button">B</string>
+    <string name="title_activity_helo">helo</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

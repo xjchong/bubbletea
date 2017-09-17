@@ -23,7 +23,7 @@
             android:parentActivityName=".MainMenu"
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".GameOver" />
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings" />
     </application>
 
 </manifest>
