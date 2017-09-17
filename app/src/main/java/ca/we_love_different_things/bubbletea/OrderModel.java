@@ -54,29 +54,29 @@ public class OrderModel {
      * Matches an ingredient with a color.
      */
     public OrderModel(){
-        listPearls.add(new Pair("Mini Pearls", BLACK));
-        listPearls.add(new Pair("No Pearls", BLUE));
-        listPearls.add(new Pair("Panda Pearls", RED));
-        listPearls.add(new Pair("Regular Pearls", WHITE));
-        listPearls.add(new Pair("Grass Jelly", GREEN));
-        listPearls.add(new Pair("Fruit Jelly", CYAN));
-        listPearls.add(new Pair("Aloe Jelly", YELLOW));
+        listPearls.add(new Pair("mini pearls", BLACK));
+        listPearls.add(new Pair("no pearls", BLUE));
+        listPearls.add(new Pair("panda pearls", RED));
+        listPearls.add(new Pair("regular pearls", WHITE));
+        listPearls.add(new Pair("grass jelly", GREEN));
+        listPearls.add(new Pair("fruit jelly", CYAN));
+        listPearls.add(new Pair("aloe jelly", YELLOW));
 
-        listSugar.add(new Pair("No Sugar", WHITE));
-        listSugar.add(new Pair("1/4 Sweet", YELLOW));
-        listSugar.add(new Pair("1/2 Sweet", GREEN));
-        listSugar.add(new Pair("3/4 Sweet", PINK));
-        listSugar.add(new Pair("Regular Sweet", BLACK));
+        listSugar.add(new Pair("no sugar", WHITE));
+        listSugar.add(new Pair("1/4 sweet", YELLOW));
+        listSugar.add(new Pair("1/2 sweet", GREEN));
+        listSugar.add(new Pair("3/4 sweet", PINK));
+        listSugar.add(new Pair("regular sweet", BLACK));
 
-        listMilk.add(new Pair("Skim Milk", WHITE));
-        listMilk.add(new Pair("1% Milk", RED));
-        listMilk.add(new Pair("2% Milk", BLUE));
-        listMilk.add(new Pair("Soy Milk", YELLOW));
+        listMilk.add(new Pair("skim milk", WHITE));
+        listMilk.add(new Pair("1% milk", RED));
+        listMilk.add(new Pair("2% milk", BLUE));
+        listMilk.add(new Pair("soy milk", YELLOW));
 
-        listFlavor.add(new Pair("Coconut", WHITE));
-        listFlavor.add(new Pair("Strawberry", RED));
-        listFlavor.add(new Pair("Taro", BLUE));
-        listFlavor.add(new Pair("Original", YELLOW));
+        listFlavor.add(new Pair("coconut", WHITE));
+        listFlavor.add(new Pair("strawberry", RED));
+        listFlavor.add(new Pair("taro", BLUE));
+        listFlavor.add(new Pair("original", YELLOW));
 
         startOrder();
     }
@@ -192,8 +192,8 @@ public class OrderModel {
     public String orderMessage() {
         // Sentence components
         String greeting[] = new String[4];
-        String first[] = new String[5];
-        String second[] = new String[2];
+        String first[] = new String[14];
+        String second[] = new String[3];
         String third[] = new String[3];
         String fourth[] = new String[3];
         String fifth[] = new String[2];
@@ -205,25 +205,23 @@ public class OrderModel {
         int greetingVal = rand(4);
 
         first[0] = "I would like to order a";
-        if (greetingVal == 2) {
-            first[1] = "Can I get a";
-        } else {
-            first[1] = "can I get a";
-        }
+        first[1] = "can I get a";
         first[2] = "I'll have the";
-        if (greetingVal == 2) {
-            first[3] = "Could I get a";
-        } else {
-            first[3] = "could I get a";
-        }
-        if (greetingVal == 2) {
-            first[4] = "Get me the";
-        } else {
-            first[4] = "get me the";
-        }
+        first[3] = "could I get a";
+        first[4] = "get me the";
+        first[5] = "I want a";
+        first[6] = "I'd like the";
+        first[7] = "I'd like a";
+        first[8] = "could I get the";
+        first[9] = "Give me a";
+        first[10] = "Give me the";
+        first[11] = "I'll try the";
+        first[12] = "I'll try a";
+        first[13] = "I'll have my usual";
 
         second[0] = "bubble tea with";
         second[1] = "tea with";
+        second[2] = "with";
 
         third[0] = ",";
         third[1] = ", topped with";
@@ -237,8 +235,16 @@ public class OrderModel {
         fifth[1] = "please.";
 
         String message = String.format("%s%s %s %s %s %s %s %s %s %s",
-                greeting[greetingVal], first[rand(5)], order.get(FLAVOR), second[rand(2)], order.get(TOPPING),
-                third[rand(3)], order.get(MILK), fourth[rand(3)], order.get(SUGAR), fifth[rand(2)]);
+                greeting[greetingVal],
+                first[rand(14)],
+                order.get(FLAVOR),
+                second[rand(3)],
+                order.get(TOPPING),
+                third[rand(3)],
+                order.get(MILK),
+                fourth[rand(3)],
+                order.get(SUGAR),
+                fifth[rand(2)]);
 
         return message;
     }

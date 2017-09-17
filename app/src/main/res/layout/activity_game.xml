@@ -43,11 +43,11 @@
                     android:visibility="visible"
                     android:src="@drawable/bubble_tea_cup"/>
 
-                <ImageView android:id="@+id/milk"
+                <ImageView android:id="@+id/sweetener"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-                <ImageView android:id="@+id/sweetener"
+                <ImageView android:id="@+id/milk"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 

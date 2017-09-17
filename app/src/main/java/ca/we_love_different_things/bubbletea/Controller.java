@@ -120,25 +120,25 @@ public class Controller extends AppCompatActivity {
         }
 
         String flavors = model.getOrder().get(FLAVOR).toString();
-        switch(flavors) {
-            case "Coconut": images[FLAVOR].setImageResource(R.drawable.flavour_coconut); break;
-            case "Strawberry": images[FLAVOR].setImageResource(R.drawable.flavour_strawberry); break;
-            case "Taro": images[FLAVOR].setImageResource(R.drawable.flavour_taro); break;
-            case "Original":images[FLAVOR].setImageResource(R.drawable.flavour_original); break;
+        switch(flavors.toLowerCase()) {
+            case "coconut": images[FLAVOR].setImageResource(R.drawable.flavour_coconut); break;
+            case "strawberry": images[FLAVOR].setImageResource(R.drawable.flavour_strawberry); break;
+            case "taro": images[FLAVOR].setImageResource(R.drawable.flavour_taro); break;
+            case "original":images[FLAVOR].setImageResource(R.drawable.flavour_original); break;
         }
 
         String toppings = model.getOrder().get(TOPPING).toString();
         switch(toppings) {
-            case "Mini Pearls": images[TOPPING].setImageResource(R.drawable.toppings_mini_pearls); break;
-            case "Panda Pearls": images[TOPPING].setImageResource(R.drawable.toppings_panda_pearls); break;
-            case "Regular Pearls":images[TOPPING].setImageResource(R.drawable.toppings_regular_pearls); break;
-            case "Grass Jelly": images[TOPPING].setImageResource(R.drawable.toppings_grass_jelly); break;
-            case "Fruit Jelly": images[TOPPING].setImageResource(R.drawable.toppings_fruit_jelly); break;
-            case "Aloe Jelly": images[TOPPING].setImageResource(R.drawable.toppings_aloe_jelly); break;
-            case "No Pearls": images[TOPPING].setImageResource(R.drawable.toppings_no_pearls); break;
+            case "mini pearls": images[TOPPING].setImageResource(R.drawable.toppings_mini_pearls); break;
+            case "panda pearls": images[TOPPING].setImageResource(R.drawable.toppings_panda_pearls); break;
+            case "regular pearls":images[TOPPING].setImageResource(R.drawable.toppings_regular_pearls); break;
+            case "grass jelly": images[TOPPING].setImageResource(R.drawable.toppings_grass_jelly); break;
+            case "fruit jelly": images[TOPPING].setImageResource(R.drawable.toppings_fruit_jelly); break;
+            case "aloe jelly": images[TOPPING].setImageResource(R.drawable.toppings_aloe_jelly); break;
+            case "no pearls": images[TOPPING].setImageResource(R.drawable.toppings_no_pearls); break;
         }
 
-        if(!model.getOrder().get(SUGAR).isMatch("No Sugar")){
+        if(!model.getOrder().get(SUGAR).isMatch("no sugar")){
             images[SUGAR].setImageResource(R.drawable.sugar_quarter);
         }
         else{

@@ -52,17 +52,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:layout_marginTop="60dp"
-            android:textSize="24sp"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:onClick="onClickBack" />
-
     </LinearLayout>
 
 </FrameLayout>
