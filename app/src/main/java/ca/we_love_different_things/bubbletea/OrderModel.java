@@ -21,7 +21,7 @@ public class OrderModel {
     private final String WHITE  = "FFFFFF";
 
     //No magic numbers
-    private final int PEARL = 0;
+    private final int TOPPING = 0;
     private final int SUGAR = 1;
     private final int FLAVOR = 2;
     private final int MILK = 3;
@@ -53,28 +53,29 @@ public class OrderModel {
      * Matches an ingredient with a color.
      */
     public OrderModel(){
-        listPearls.add(new Pair("Tapioca", BLACK));
-        listPearls.add(new Pair("Jelly", BLUE));
-        listPearls.add(new Pair("Exploding", RED));
-        listPearls.add(new Pair("No", WHITE));
-        listPearls.add(new Pair("Aloe Vera", GREEN));
-        listPearls.add(new Pair("Grass Jelly", CYAN));
+        listPearls.add(new Pair("Mini Pearls", BLACK));
+        listPearls.add(new Pair("No Pearls", BLUE));
+        listPearls.add(new Pair("Panda Pearls", RED));
+        listPearls.add(new Pair("Regular Pearls", WHITE));
+        listPearls.add(new Pair("Grass Jelly", GREEN));
+        listPearls.add(new Pair("Fruit Jelly", CYAN));
+        listPearls.add(new Pair("Aloe Jelly", YELLOW));
 
-        listSugar.add(new Pair("No", WHITE));
-        listSugar.add(new Pair("1/4", YELLOW));
-        listSugar.add(new Pair("1/2", GREEN));
-        listSugar.add(new Pair("3/4", PINK));
-        listSugar.add(new Pair("Regular", BLACK));
+        listSugar.add(new Pair("No Sugar", WHITE));
+        listSugar.add(new Pair("1/4 Sweet", YELLOW));
+        listSugar.add(new Pair("1/2 Sweet", GREEN));
+        listSugar.add(new Pair("3/4 Sweet", PINK));
+        listSugar.add(new Pair("Regular Sweet", BLACK));
 
         listFlavor.add(new Pair("Coconut", WHITE));
         listFlavor.add(new Pair("Strawberry", RED));
-        listFlavor.add(new Pair("Blueberry", BLUE));
-        listFlavor.add(new Pair("Banana", YELLOW));
+        listFlavor.add(new Pair("Taro", BLUE));
+        listFlavor.add(new Pair("Original", YELLOW));
 
-        listMilk.add(new Pair("Skim", WHITE));
-        listMilk.add(new Pair("1%", RED));
-        listMilk.add(new Pair("2%", BLUE));
-        listMilk.add(new Pair("Soy", YELLOW));
+        listMilk.add(new Pair("Skim Milk", WHITE));
+        listMilk.add(new Pair("1% Milk", RED));
+        listMilk.add(new Pair("2% Milk", BLUE));
+        listMilk.add(new Pair("Soy Milk", YELLOW));
 
         startOrder();
     }
@@ -156,7 +157,7 @@ public class OrderModel {
      */
     public ArrayList<Pair> getButtons(){
         switch(stage){
-            case PEARL :    return buttonPearls;
+            case TOPPING:    return buttonPearls;
             case SUGAR :    return buttonSugar;
             case FLAVOR:    return buttonFlavor;
             case MILK  :    return buttonMilk;
@@ -223,19 +224,19 @@ public class OrderModel {
         second[0] = "bubble tea with";
         second[1] = "tea with";
 
-        third[0] = "pearls,";
-        third[1] = "pearls, topped with";
-        third[2] = "pearls, and";
+        third[0] = ",";
+        third[1] = ", topped with";
+        third[2] = ", and";
 
-        fourth[0] = "milk, and";
-        fourth[1] = "milk, along with";
-        fourth[2] = "milk, plus";
+        fourth[0] = ", and";
+        fourth[1] = ", along with";
+        fourth[2] = ", plus";
 
-        fifth[0] = "sugar.";
-        fifth[1] = "sugar please.";
+        fifth[0] = ".";
+        fifth[1] = "please.";
 
         String message = String.format("%s%s %s %s %s %s %s %s %s %s",
-                greeting[greetingVal], first[rand(5)], order.get(FLAVOR), second[rand(2)], order.get(PEARL),
+                greeting[greetingVal], first[rand(5)], order.get(FLAVOR), second[rand(2)], order.get(TOPPING),
                 third[rand(3)], order.get(MILK), fourth[rand(3)], order.get(SUGAR), fifth[rand(2)]);
 
         return message;
