@@ -36,6 +36,7 @@
             android:textSize="24sp"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"
+            android:layout_marginTop="20dp"
             android:onClick="button" />
     </LinearLayout>
 </FrameLayout>
