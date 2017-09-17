@@ -34,7 +34,6 @@ public class Pair {
     }
 
     public boolean isMatch(String ingredient){
-        Log.d("onclick", "in isMatch");
         return name.equals(ingredient);
     }
 

@@ -60,11 +60,11 @@ public class OrderModel {
         listPearls.add(new Pair("Aloe Vera", GREEN));
         listPearls.add(new Pair("Grass Jelly", CYAN));
 
-        //listSugar[0] = new Pair("0%", "White")));
-        listSugar.add(new Pair("25%", YELLOW));
-        listSugar.add(new Pair("50%", GREEN));
-        listSugar.add(new Pair("75%", PINK));
-        listSugar.add(new Pair("100%", BLACK));
+        listSugar.add(new Pair("No", WHITE));
+        listSugar.add(new Pair("1/4", YELLOW));
+        listSugar.add(new Pair("1/2", GREEN));
+        listSugar.add(new Pair("3/4", PINK));
+        listSugar.add(new Pair("Regular%", BLACK));
 
         listFlavor.add(new Pair("Coconut", WHITE));
         listFlavor.add(new Pair("Strawberry", RED));
@@ -94,6 +94,7 @@ public class OrderModel {
     public int getPoints() {
         return points;
     }
+
     /**
      * Shuffles the ArrayLists.
      * @param list The set of lists to shuffle.

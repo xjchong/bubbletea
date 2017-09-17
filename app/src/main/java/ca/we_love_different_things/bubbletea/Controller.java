@@ -57,6 +57,9 @@ public class Controller extends AppCompatActivity {
         moveTaskToBack(false);
     }
 
+    /**
+     * Manages the progress of the Progress Bar.
+     */
     public void progressBarTimer() {
         progressBar.setProgress(0);
         TimerTask task = new TimerTask() {
@@ -64,21 +67,24 @@ public class Controller extends AppCompatActivity {
             public void run() {
                 progressBar.incrementProgressBy(1);
 
-                if (progressBar.getProgress() >= 100) {
-                    gameOver();
-                }
+                //Game over
+                if (progressBar.getProgress() >= 100)   gameOver();
             }
         };
 
+        //schedule starts after 0.01 seconds and repeats every second.
         timer.schedule(task, 10, 1000);
     }
 
+    /**
+     *
+     */
     public void setNewOrder(){
-        // tell the model to set match == true
+        //Tell the model to set match == true
         model.setMatch(true);
+
+        //Changes the TextViews
         message.setText(model.orderMessage());
-
-
         score.setText("" + model.getPoints());
 
         //maybe add an empty cup
@@ -102,10 +108,10 @@ public class Controller extends AppCompatActivity {
         timer.cancel();
     }
 
-    public void onIngredientClick(View button) {
-        Button b = (Button) button;
+    public void onIngredientClick(View view) {
+        Button button = (Button) view;
         //add image
-        model.update(b.getText().toString());
+        model.update(button.getText().toString());
         if (model.getStage() == 0) {
             if (model.getMatch()){
                 progressBar.incrementProgressBy(-5);

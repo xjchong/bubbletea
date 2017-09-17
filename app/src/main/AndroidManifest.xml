@@ -21,8 +21,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:parentActivityName=".MainMenu"
-            android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name=".GameOver"></activity>
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".GameOver" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>
